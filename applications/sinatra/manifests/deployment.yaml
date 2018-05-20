@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sinatra-kube-example
+spec:
+  template:
+    metadata:
+      name: sinatra-kube-example
+      labels:
+        service: sinatra-kube-example
+    spec:
+      containers:
+      - name: sinatra-kube-example-container
+        image: sinatra-kube-example:load
+        resources:
+          requests:
+            cpu: 200m
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SUPER_SECRET
+          value: "This is my secret string"
+      restartPolicy: Always

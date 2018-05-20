@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: sinatra-kube-example
+  name: sinatra-kube-example
+spec:
+  type: NodePort
+  ports:
+  - name: sinatra-kube-example
+    port: 4000
+    protocol: TCP
+    targetPort: 4567
+    nodePort: 30000
+  selector:
+    service: sinatra-kube-example
