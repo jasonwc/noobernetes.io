@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: sinatra-kube-example
+  name: noobernetes-sinatra-hpa
 spec:
   maxReplicas: 10
   minReplicas: 1
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: sinatra-kube-example
+    name: noobernetes-sinatra
   targetCPUUtilizationPercentage: 50

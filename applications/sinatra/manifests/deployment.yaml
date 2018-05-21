@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: sinatra-kube-example
+  name: noobernetes-sinatra
 spec:
   template:
     metadata:
-      name: sinatra-kube-example
+      name: noobernetes-sinatra
       labels:
-        service: sinatra-kube-example
+        service: noobernetes-sinatra
     spec:
       containers:
-      - name: sinatra-kube-example-container
-        image: sinatra-kube-example:load
+      - name: noobernetes-sinatra-container
+        image: noobernetes-sinatra:latest
         resources:
           requests:
             cpu: 200m

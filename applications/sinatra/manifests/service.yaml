@@ -2,15 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: sinatra-kube-example
-  name: sinatra-kube-example
+    service: noobernetes-sinatra
+  name: noobernetes-sinatra-service
 spec:
   type: NodePort
   ports:
-  - name: sinatra-kube-example
+  - name: noobernetes-sinatra-port
     port: 4000
     protocol: TCP
     targetPort: 4567
     nodePort: 30000
   selector:
-    service: sinatra-kube-example
+    service: noobernetes-sinatra
+    
