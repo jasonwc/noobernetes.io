@@ -122,7 +122,7 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
 
 ### Writing our Web Server
-We're going to make a simple web application that has one route. It will build widgets, so that we can simulate CPU load in future tutorial steps.
+We're going to make a simple web application that has one route. It will build widgets, so that we can simulate CPU load in future tutorial steps. To start, create a file called `web.rb` with the following content.
 
 ```ruby
 
