@@ -10,7 +10,7 @@ Now that we have our Dockerfile, we can use it to deploy our application with Ku
 Kubernetes uses yaml files to define the configuration of the app that you are running. In this case, we need to write a manifest that deploys our application and runs our container.
 
 ### What's in a manifest?
-A manifest contains a description of the resource you wish to deploy. In this case we are creating a Deployment that will run a pod with the container we made previously.
+A manifest contains a description of the resource you wish to deploy. In this case we are creating a Deployment that will run a pod with the container we made previously. To start, create a folder called `manifests` in your current application folder. Within `manifests`, create a file called `deployment.yaml`.
 
 ```yaml
 apiVersion: extensions/v1beta1
