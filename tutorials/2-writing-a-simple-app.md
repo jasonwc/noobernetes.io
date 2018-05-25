@@ -61,13 +61,19 @@ Now that we've defined these files, we should be able to `cd` out of the directo
 ```
 > cd ..
 > cd noobernetes
+Required ruby-2.3.7 is not installed.
+To install do: 'rvm install "ruby-2.3.7"'
+```
+
+We see that ruby-2.3.7 is not yet installed. We can now install the version of ruby that we've specified in our `.ruby-version` without impacting our system installed Ruby.
+
+```
+> rvm install ruby-2.3.7
+> cd ..
+> cd noobernetes
 ruby-2.3.7 - #gemset created /Users/mavenlink/.rvm/gems/ruby-2.3.7@noobernetes
 ruby-2.3.7 - #generating noobernetes wrappers - please wait
 ```
-
-Now we can install the version of ruby that we've specified in our `.ruby-version` without impacting our system installed Ruby.
-
-`rvm install ruby-2.3.7`
 
 ### Writing our Gemfile
 
