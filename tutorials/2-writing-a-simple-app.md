@@ -126,8 +126,6 @@ We're going to make a simple web application that has one route. It will build w
 
 ```ruby
 
-# frozen_string_literal: true
-
 require 'sinatra'
 
 set :bind, '0.0.0.0'
