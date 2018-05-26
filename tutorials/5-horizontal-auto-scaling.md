@@ -53,7 +53,31 @@ We can now apply this to our cluster just like any other Kubernetes resource.
 > kubectl apply -f applications/sinatra/manifests/horizontal-pod-autoscaler.yaml
 horizontalpodautoscaler "noobernetes-hpa" created
 
-Lets check out our HPA.
+Before we begin trying to scale our pods, we first must update our Deployment to specify its resource requests, which in our case will be based on CPU utilization. The CPU utilization for a resource request is added under `spec` for a deployment. Your deployment should now look as follows.
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: noobernetes-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: noobernetes
+      labels:
+        service: noobernetes
+    spec:
+      containers:
+      - name: noobernetes-container
+        image: noobernetes:hello-world
+        resources:
+          requests:
+            cpu: 200m
+      restartPolicy: Always
+```
+
+Now lets check out our HPA.
 
 ```
 > kubectl get hpa
