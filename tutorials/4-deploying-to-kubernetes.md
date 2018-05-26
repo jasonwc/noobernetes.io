@@ -101,7 +101,7 @@ noobernetes-service   LoadBalancer   10.106.51.138   localhost     4000:31347/TC
 This tells us that its mapped localhost to the cluster-ip of our running container. Visit localhost:4000 and view your app!
 
 ### Writing a Service manifest
-Of course it would be a pain to have to remember to `expose` our deployment each time, so we're going to write a manifest so that we can setup our service with the `kubectl` interface.
+Of course it would be a pain to have to remember to `expose` our deployment each time, so we're going to write a manifest `service.yaml` so that we can setup our service with the `kubectl` interface.
 
 ```yaml
 apiVersion: v1
