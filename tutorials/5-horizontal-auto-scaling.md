@@ -31,32 +31,34 @@ clusterrolebinding "system:metrics-server" created
 The `metrics-server` will begin scraping our running containers for metrics.
 
 ## Writing our Horizontal Pod Autoscaler (HPA)
+We will add a file called `horizontal-pod-autoscaler.yaml` for our HPA manifest.
+
 ```yaml
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: sinatra-kube-example
+  name: noobernetes-hpa
 spec:
   maxReplicas: 10
   minReplicas: 1
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: sinatra-kube-example
+    name: noobernetes-deployment
   targetCPUUtilizationPercentage: 50
 ```
 
 We can now apply this to our cluster just like any other Kubernetes resource.
 
 > kubectl apply -f applications/sinatra/manifests/horizontal-pod-autoscaler.yaml
-horizontalpodautoscaler "noobernetes" created
+horizontalpodautoscaler "noobernetes-hpa" created
 
 Lets check out our HPA.
 
-``` 
+```
 > kubectl get hpa
 NAME                      REFERENCE                        TARGETS     MINPODS   MAXPODS   REPLICAS   AGE
-noobernetes-sinatra-hpa   Deployment/noobernetes-sinatra   0% / 50%    1         10        1          1m
+noobernetes-hpa   Deployment/noobernetes-deployment        0% / 50%    1         10        1          1m
 ```
 We can see that its targeting our deployment, and that CPU usage is currently at 0% of our 50% target that we specified earlier. It'll also let us know its current replica count and its minimum and maximum boundaries.
 
