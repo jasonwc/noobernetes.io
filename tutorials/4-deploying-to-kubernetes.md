@@ -122,7 +122,7 @@ spec:
     service: noobernetes
 ```
 
-This will allow us to access our application at `localhost:30000`.
+This will allow us to access our application at `localhost:30000` after running the command `kubectl apply -f service.yaml` from within the `manifests` folder.
 
 ## Conclusion
 We now have our application running locally in Kubernetes! In the next section, we're going to configure our application to scale with CPU usage.
