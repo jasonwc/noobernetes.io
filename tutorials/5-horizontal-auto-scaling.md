@@ -53,7 +53,7 @@ We can now apply this to our cluster just like any other Kubernetes resource.
 > kubectl apply -f applications/sinatra/manifests/horizontal-pod-autoscaler.yaml
 horizontalpodautoscaler "noobernetes-hpa" created
 
-Before we begin trying to scale our pods, we first must update our Deployment to specify its resource requests, which in our case will be based on CPU utilization. The CPU utilization for a resource request is added under `spec` for a deployment. Your deployment should now look as follows.
+Before we begin trying to scale our pods, we first must update our Deployment to specify its resource requests, which in our case will be based on CPU utilization. The CPU utilization for a resource request is added under `spec` for a deployment. Your deployment should now look as follows. Note that after changing the Deployment, you will need to apply it again via `kubectl apply -f deployment.yaml` from within the `manifests` folder in your application in order for the changes to be applied.
 
 ```yaml
 apiVersion: extensions/v1beta1
