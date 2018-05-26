@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: noobernetes-container
-        image: noobernetes:master
+        image: noobernetes:hello-world
       restartPolicy: Always
 
 ```
