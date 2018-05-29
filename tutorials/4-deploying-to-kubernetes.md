@@ -10,7 +10,7 @@ Now that we have our Dockerfile, we can use it to deploy our application with Ku
 Kubernetes uses yaml files to define the configuration of the app that you are running. In this case, we need to write a manifest that deploys our application and runs our container.
 
 ### What's in a manifest?
-A manifest contains a description of the resource you wish to deploy. In this case we are creating a Deployment that will run a pod with the container we made previously.
+A manifest contains a description of the resource you wish to deploy. In this case we are creating a Deployment that will run a pod with the container we made previously. To start, create a folder called `manifests` in your current application folder. Within `manifests`, create a file called `deployment.yaml`.
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: noobernetes-container
-        image: noobernetes:master
+        image: noobernetes:hello-world
       restartPolicy: Always
 
 ```
@@ -75,7 +75,7 @@ kubectl delete deployment <your_app_name>
 ### Exposing your app locally
 So we can now see that our pod is running. Like before with Docker, we need to make set it up so that we can access it on our host machine.
 
-`kubectl expose deployment noobernetes --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service`
+`kubectl expose deployment noobernetes-deployment --port=4444 --target-port=4567 --type=LoadBalancer --name=noobernetes-service`
 
 You should see some output like this:
 
@@ -101,7 +101,7 @@ noobernetes-service   LoadBalancer   10.106.51.138   localhost     4000:31347/TC
 This tells us that its mapped localhost to the cluster-ip of our running container. Visit localhost:4000 and view your app!
 
 ### Writing a Service manifest
-Of course it would be a pain to have to remember to `expose` our deployment each time, so we're going to write a manifest so that we can setup our service with the `kubectl` interface.
+Of course it would be a pain to have to remember to `expose` our deployment each time, so we're going to write a manifest `service.yaml` so that we can setup our service with the `kubectl` interface.
 
 ```yaml
 apiVersion: v1
@@ -122,7 +122,7 @@ spec:
     service: noobernetes
 ```
 
-This will allow us to access our application at `localhost:30000`.
+This will allow us to access our application at `localhost:30000` after running the command `kubectl apply -f service.yaml` from within the `manifests` folder.
 
 ## Conclusion
 We now have our application running locally in Kubernetes! In the next section, we're going to configure our application to scale with CPU usage.
