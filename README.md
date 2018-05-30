@@ -16,4 +16,4 @@ Each tutorial contains all the code required for that section, and lists any dep
 - [Horizontal Pod Autoscaling](./tutorials/5-horizontal-auto-scaling.md)
 
 ## About
-These tutorials were made as I was trying to learn Kubernetes for use at [Mavenlink](www.mavenlink.com) and as an example for a talk given to the [Women Level Up](http://womenlevelup.com/) meetup. I hope to add more to it as I continue to explore Kubernetes. PRs welcome!
+These tutorials were made as I was trying to learn Kubernetes for use at [Mavenlink](https://www.mavenlink.com) and as an example for a talk given to the [Women Level Up](http://womenlevelup.com/) meetup. I hope to add more to it as I continue to explore Kubernetes. PRs welcome!
