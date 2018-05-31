@@ -156,7 +156,7 @@ Now that we've got our app built, we can run it with the following command:
 [2018-05-20 15:23:10] INFO  WEBrick::HTTPServer#start: pid=49289 port=4567
 ```
 
-We can visit the app and see it running at `localhost:4576`
+We can visit the app and see it running at `localhost:4567`
 
 ## Conclusion
 We now have a simple Ruby server running locally. Next we're going to get it containerized with Docker!
