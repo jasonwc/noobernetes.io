@@ -75,7 +75,7 @@ kubectl delete deployment <your_app_name>
 ### Exposing your app locally
 So we can now see that our pod is running. Like before with Docker, we need to make set it up so that we can access it on our host machine.
 
-`kubectl expose deployment noobernetes-deployment --port=4444 --target-port=4567 --type=LoadBalancer --name=noobernetes-service`
+`kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service`
 
 You should see some output like this:
 
