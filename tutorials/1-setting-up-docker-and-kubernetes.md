@@ -32,4 +32,4 @@ You now have everything you need to start playing around with Docker and Kuberne
 
 ---
 
-Continue to [Writing a simple app](./2-writing-a-simple-app)
+Continue to [Writing a simple app](./2-writing-a-simple-app.md)
