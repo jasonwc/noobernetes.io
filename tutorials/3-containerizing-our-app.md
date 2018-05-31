@@ -5,7 +5,7 @@ Kubernetes is a container orchestration service, which means that we need to hav
 ## Writing our Dockerfile
 So a Dockerfile can be thought as instructions to build an environment and then run an app within that environment.
 
-Heres an example dockerfile from the [Docker Docs](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile) that shows the various parts of a Dockerfile.
+Here's an example dockerfile from the [Docker Docs](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile) that shows the various parts of a Dockerfile.
 
 ```dockerfile
 # Use an official Python runtime as a parent image
