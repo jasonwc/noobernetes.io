@@ -105,7 +105,7 @@ For now, we're going to use the `kubectl run` command to spin up a box that we c
 ```
 > kubectl run -i --tty load-generator --image=busybox /bin/sh
 If you don't see a command prompt, try pressing enter.
-/ # while true; do wget -q -O- http://noobernetes-sinatra-service.default.svc.cluster.local:4000; done
+/ # while true; do wget -q -O- http://noobernetes-service.default.svc.cluster.local:4000; done
 ```
 
 It may take some time, but eventually you should see CPU usage climb and more pods get automatically spun up by the HPA.
