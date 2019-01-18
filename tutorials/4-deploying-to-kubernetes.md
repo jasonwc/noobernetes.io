@@ -4,7 +4,7 @@
 Now that we have our Dockerfile, we can use it to deploy our application with Kubernetes. In this tutorial, we'll learn about Deployments, Kubernetes manifests, and how to apply these manifests to our local Kubernetes cluster. Once we've done that, we'll expose a service for our deployment so that we can view it in the browser.
 
 ## Prerequisites
-- You should have completed `1-building-a-dockerfile`
+- You should have completed `1-setting-up-docker-and-kubernetes`
 
 ### Writing a Kubernetes Deployment
 Kubernetes uses yaml files to define the configuration of the app that you are running. In this case, we need to write a manifest that deploys our application and runs our container.
