@@ -43,7 +43,7 @@ There are a few things to call out here:
 Deploying to Kubernetes is pretty easy. You simply apply the manifest to your cluster and have kubernetes do the rest.
 
 ```shell
-> kubectl apply -f noobernetes/applications/manifests/deployment.yaml
+> kubectl apply -f manifests/deployment.yaml
 Using docker VM
 deployment "noobernetes" created
 ```
