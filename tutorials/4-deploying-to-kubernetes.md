@@ -80,7 +80,7 @@ So we can now see that our pod is running. Like before with Docker, we need to m
 You should see some output like this:
 
 ```shell
-> kubectl expose deployment noobernetes --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service
+> kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service
 Using docker VM
 service "noobernetes-service" exposed
 ```
