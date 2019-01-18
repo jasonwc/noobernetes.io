@@ -61,7 +61,7 @@ kubectl get pods
 kubectl get pods --all-namespaces
 
 # gets the logs for the pod specified
-kubectl log -f <pod_name>
+kubectl logs -f <pod_name>
 
 # returns back information about the pods lifecycle and configuration
 kubectl describe pod <pod_name> 
