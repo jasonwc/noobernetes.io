@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: noobernetes-sinatra
+  name: noobernetes
 spec:
   template:
     metadata:
-      name: noobernetes-sinatra
+      name: noobernetes
       labels:
-        service: noobernetes-sinatra
+        service: noobernetes-service
     spec:
       containers:
-      - name: noobernetes-sinatra-container
-        image: noobernetes-sinatra:latest
+      - name: noobernetes-container
+        image: noobernetes:hello-world
         resources:
           requests:
             cpu: 200m
