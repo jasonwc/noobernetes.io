@@ -82,7 +82,7 @@ You should see some output like this:
 ```shell
 > kubectl expose deployment noobernetes --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes
 Using docker VM
-service "noobernetes-sinatra" exposed
+service "noobernetes" exposed
 ```
 
 We've defined a Service, which can be thought of as a way to control access to a deployment or pod. As the actual running container changes (if it dies, or is restarted) the service is responsible for always allowing us to route traffic within our cluster to the correct pods.
@@ -92,7 +92,7 @@ Our service says that we want to expose our app on localhost:4000, pointing to t
 `kubectl get services noobernetes`
 
 ```shell
-> kubectl get services my-sinatra
+> kubectl get services noobernetes
 Using docker VM
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 noobernetes   LoadBalancer   10.106.51.138   localhost     4000:31347/TCP   47m
