@@ -16,14 +16,14 @@ A manifest contains a description of the resource you wish to deploy. In this ca
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: noobernetes-deployment
+  name: noobernetes
 spec:
   replicas: 1
   template:
     metadata:
       name: noobernetes
       labels:
-        service: noobernetes
+        service: noobernetes-service
     spec:
       containers:
       - name: noobernetes-container
@@ -75,7 +75,7 @@ kubectl delete deployment <your_app_name>
 ### Exposing your app locally
 So we can now see that our pod is running. Like before with Docker, we need to make set it up so that we can access it on our host machine.
 
-`kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service`
+`kubectl expose deployment noobernetes --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes`
 
 You should see some output like this:
 
@@ -89,13 +89,13 @@ We've defined a Service, which can be thought of as a way to control access to a
 
 Our service says that we want to expose our app on localhost:4000, pointing to the 4567 port of the running container.
 
-`kubectl get services noobernetes-service`
+`kubectl get services noobernetes`
 
 ```shell
-> kubectl get services my-service
+> kubectl get services noobernetes
 Using docker VM
 NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-noobernetes-service   LoadBalancer   10.106.51.138   localhost     4000:31347/TCP   47m
+noobernetes   LoadBalancer   10.106.51.138   localhost     4000:31347/TCP   47m
 ```
 
 This tells us that its mapped localhost to the cluster-ip of our running container. Visit localhost:4000 and view your app!
@@ -107,19 +107,19 @@ Of course it would be a pain to have to remember to `expose` our deployment each
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    service: noobernetes
   name: noobernetes
+  labels:
+    service: noobernetes-service
 spec:
   type: NodePort
   ports:
-  - name: noobernetes
+  - name: noobernetes-port
     port: 4000
     protocol: TCP
     targetPort: 4567
     nodePort: 30000
   selector:
-    service: noobernetes
+    service: noobernetes-service
 ```
 
 This will allow us to access our application at `localhost:30000` after running the command `kubectl apply -f service.yaml` from within the `manifests` folder.
