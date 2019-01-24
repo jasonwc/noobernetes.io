@@ -4,7 +4,7 @@
 Now that we have our Dockerfile, we can use it to deploy our application with Kubernetes. In this tutorial, we'll learn about Deployments, Kubernetes manifests, and how to apply these manifests to our local Kubernetes cluster. Once we've done that, we'll expose a service for our deployment so that we can view it in the browser.
 
 ## Prerequisites
-- You should have completed `1-building-a-dockerfile`
+- You should have completed `1-setting-up-docker-and-kubernetes`
 
 ### Writing a Kubernetes Deployment
 Kubernetes uses yaml files to define the configuration of the app that you are running. In this case, we need to write a manifest that deploys our application and runs our container.
@@ -43,7 +43,7 @@ There are a few things to call out here:
 Deploying to Kubernetes is pretty easy. You simply apply the manifest to your cluster and have kubernetes do the rest.
 
 ```shell
-> kubectl apply -f noobernetes/applications/manifests/deployment.yaml
+> kubectl apply -f manifests/deployment.yaml
 Using docker VM
 deployment "noobernetes" created
 ```
@@ -61,7 +61,7 @@ kubectl get pods
 kubectl get pods --all-namespaces
 
 # gets the logs for the pod specified
-kubectl log -f <pod_name>
+kubectl logs -f <pod_name>
 
 # returns back information about the pods lifecycle and configuration
 kubectl describe pod <pod_name> 
@@ -80,7 +80,7 @@ So we can now see that our pod is running. Like before with Docker, we need to m
 You should see some output like this:
 
 ```shell
-> kubectl expose deployment noobernetes --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service
+> kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service
 Using docker VM
 service "noobernetes-service" exposed
 ```
