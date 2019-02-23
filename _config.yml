@@ -1,1 +1,8 @@
 theme: jekyll-theme-cayman
+title: Noobernetes
+description: Kubernetes tutorials for Noobs 
+url: https://noobernetes.io
+author: Jason Carter
+plugins:
+  - jekyll-seo-tag
+google_analytics: UA-50147941-2
