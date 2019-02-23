@@ -17,3 +17,10 @@ Each tutorial contains all the code required for that section, and lists any dep
 
 ## About
 These tutorials were made as I was trying to learn Kubernetes for use at [Mavenlink](https://www.mavenlink.com) and as an example for a talk given to the [Women Level Up](http://womenlevelup.com/) meetup. I hope to add more to it as I continue to explore Kubernetes. PRs welcome!
+
+
+## Thanks
+To my coworkers at Mavenlink for using this tutorial and helping improve it!
+
+## License
+MIT
