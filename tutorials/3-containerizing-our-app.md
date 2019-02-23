@@ -137,7 +137,7 @@ Successfully tagged noobernetes:hello-world
 Essentially, this is Docker showing you what steps its running in the Dockerfile we created! 
 
 ### Finding the Docker Image
-Sometimes you want to look at all the Docker repositories you have on your machine.
+Sometimes you want to look at all the Docker images you have on your machine. In our case we just created one with the `hello-world` tag in the `noobernetes` respository. You can think of a repository as a group of images.
 
 `docker image ls`
 ```shell
