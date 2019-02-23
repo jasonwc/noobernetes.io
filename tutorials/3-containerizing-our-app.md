@@ -1,9 +1,9 @@
 # Containerizing our app
 ## Introduction
-Kubernetes is a container orchestration service, which means that we need to have our app running in a Docker container. In this section, we'll write a Dockerfile and learn how to build and tag it locally. Checkout `Dockerfile` for the completed dockerfile.
+Kubernetes is a container orchestration service, which means that we need to have our app running in a Docker container. In this section, we'll write a Dockerfile and learn how to build and tag it locally. Take a look at the `Dockerfile` in this respository for the complete example.
 
 ## Writing our Dockerfile
-So a Dockerfile can be thought as instructions to build an environment and then run an app within that environment.
+A Dockerfile can be thought as instructions to build an environment and then run an app within that environment.
 
 Here's an example dockerfile from the [Docker Docs](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile) that shows the various parts of a Dockerfile.
 
@@ -137,7 +137,7 @@ Successfully tagged noobernetes:hello-world
 Essentially, this is Docker showing you what steps its running in the Dockerfile we created! 
 
 ### Finding the Docker Image
-Sometimes you want to look at all the Docker repositories you have on your machine.
+Sometimes you want to look at all the Docker images you have on your machine. In our case we just created one with the `hello-world` tag in the `noobernetes` respository. You can think of a repository as a group of images.
 
 `docker image ls`
 ```shell

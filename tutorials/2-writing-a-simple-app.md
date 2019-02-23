@@ -87,10 +87,10 @@ gem 'sinatra'
 
 Once we've gotten our Gemfile written, we're going to install our dependencies to use bundler to install our dependencies.
 
-We'll first need to install `bundler`.
+We'll first need to install `bundler`. We're specifying a version here so that we have a compatible bundler version for our Dockerfile in future steps.
 
 ```
-> gem install bundler
+> gem install bundler -v 1.16.2
 Fetching: bundler-1.16.2.gem (100%)
 Successfully installed bundler-1.16.2
 Parsing documentation for bundler-1.16.2
