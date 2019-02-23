@@ -1,6 +1,6 @@
 # Containerizing our app
 ## Introduction
-Kubernetes is a container orchestration service, which means that we need to have our app running in a Docker container. In this section, we'll write a Dockerfile and learn how to build and tag it locally. Checkout `Dockerfile` for the completed dockerfile.
+Kubernetes is a container orchestration service, which means that we need to have our app running in a Docker container. In this section, we'll write a Dockerfile and learn how to build and tag it locally. Take a look at the `Dockerfile` in this respository for the complete example.
 
 ## Writing our Dockerfile
 So a Dockerfile can be thought as instructions to build an environment and then run an app within that environment.
