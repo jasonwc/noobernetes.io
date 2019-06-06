@@ -10,7 +10,7 @@ Each tutorial contains all the code required for that section, and lists any dep
 
 ## Tutorials
 - [Setting up Docker and Kubernetes](./tutorials/1-setting-up-docker-and-kubernetes.md)
-- [Writing a simple app](./tutorials/2-writing-a-simple-app)
+- [Writing a simple app](./tutorials/2-writing-a-simple-app.md)
 - [Containerizing our app](./tutorials/3-containerizing-our-app.md)
 - [Deploying to Kubernetes](./tutorials/4-deploying-to-kubernetes.md)
 - [Horizontal Pod Autoscaling](./tutorials/5-horizontal-auto-scaling.md)
