@@ -2,16 +2,16 @@
 ## Introduction
 Before we get started, we're going to set up a local Kubernetes cluster and Docker daemon so that we can build docker images and deploy them to a cluster. We're going to use Docker's desktop application as its the simplest way to get up and running.
 
+## Mac
 ### Installing Docker for Mac
 1) Visit the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 
-2) Click `Get Docker CE for Mac (Edge)`. This version ships with experimental Kubernetes support.
+2) Click `Get Stable` and install it.
 
-3) Install it!
+### Enabling Kubernetes
+1) Click on Docker for Desktop in the menu bar, go to _Preferences_ -> _Kubernetes_ and click _Enable Kubernetes_ and _Apply & Restart_
 
-4) Once it has finished installing, go to preferences and click on `Kubernetes`. Then select the `Enable Kubernetes` checkbox.
-
-5) Once Docker has completed installing Kubernetes you can test that it is working by running the following in a terminal of your choice:
+2) Once Docker has completed installing Kubernetes you can test that it is working by using `kubectl`:
 
 ``` 
 # Check that Kubernetes is running
@@ -23,6 +23,12 @@ docker-for-desktop   Ready     master    3d        v1.9.6
 > docker -v
 Docker version 18.05.0-ce, build f150324
 ```
+
+## Windows
+_Coming soon_
+
+## Linux
+_Coming soon_
 
 ## Conclusion
 You now have everything you need to start playing around with Docker and Kubernetes!

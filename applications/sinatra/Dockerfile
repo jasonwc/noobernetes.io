@@ -1,7 +1,9 @@
-FROM ruby:2.3.7
+FROM ruby:2.7.1
 
 WORKDIR /app
 ADD . /app
+
+RUN gem install bundler:1.16.1
 
 RUN cd /app && \
     bundle install

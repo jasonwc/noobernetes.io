@@ -2,13 +2,13 @@
 ## Introduction
 In order to play around with Kubernetes, we're going to write a simple Ruby web server with Sinatra. Feel free to skip this section if you want to jump to Docker and Kubernetes. The complete app code can be found under `applications/sinatra` in this repo.
 
+## Mac
 ### Verifying that we have Ruby installed
 Most Mac's come with Ruby installed. We can verify that with the following command:
 
 ```
 > ruby -v
-ruby 2.3.7p456 (2018-03-28 revision 63024) [x86_64-darwin17]
-
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
 ```
 
 If you don't, thats ok too! Follow the [installation guide](https://www.ruby-lang.org/en/documentation/installation/) at ruby-lang.org to install ruby on your system.
@@ -44,10 +44,10 @@ Create a directory called `noobernetes` with the `mkdir` command.
 ### Writing our `.ruby-version` and `.ruby-gemset`
 These files simply let us declare a separate ruby version and gemset so that we can isolate our apps dependencies and ruby version from the rest of our ruby apps.
 
-We'll start by creating a `.ruby-version` file. In our case, we're going to use `ruby-2.3.7`.
+We'll start by creating a `.ruby-version` file. In our case, we're going to use `ruby-2.7.1`.
 
 ```
-2.3.7
+2.7.1
 ```
 
 Next we'll create a `.ruby-gemset` file and create a name for where we want our gems to be installed.
@@ -61,18 +61,18 @@ Now that we've defined these files, we should be able to `cd` out of the directo
 ```
 > cd ..
 > cd noobernetes
-Required ruby-2.3.7 is not installed.
-To install do: 'rvm install "ruby-2.3.7"'
+Required ruby-2.7.1 is not installed.
+To install do: 'rvm install "ruby-2.7.1"'
 ```
 
-We see that ruby-2.3.7 is not yet installed. We can now install the version of ruby that we've specified in our `.ruby-version` without impacting our system installed Ruby.
+We see that ruby-2.7.1 is not yet installed. We can now install the version of ruby that we've specified in our `.ruby-version` without impacting our system installed Ruby.
 
 ```
-> rvm install ruby-2.3.7
+> rvm install ruby-2.7.1
 > cd ..
 > cd noobernetes
-ruby-2.3.7 - #gemset created /Users/mavenlink/.rvm/gems/ruby-2.3.7@noobernetes
-ruby-2.3.7 - #generating noobernetes wrappers - please wait
+ruby-2.7.1 - #gemset created /Users/mavenlink/.rvm/gems/ruby-2.7.1@noobernetes
+ruby-2.7.1 - #generating noobernetes wrappers - please wait
 ```
 
 ### Writing our Gemfile
