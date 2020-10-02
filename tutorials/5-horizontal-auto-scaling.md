@@ -35,24 +35,18 @@ The `metrics-server` will begin scraping our running containers for metrics.
 We will add a file called `horizontal-pod-autoscaler.yaml` for our HPA manifest.
 
 ```yaml
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: noobernetes-hpa
 spec:
+  maxReplicas: 10
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: noobernetes
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
+  targetCPUUtilizationPercentage: 50
 ```
 
 We can now apply this to our cluster just like any other Kubernetes resource.
