@@ -13,28 +13,36 @@ Kubernetes uses yaml files to define the configuration of the app that you are r
 A manifest contains a description of the resource you wish to deploy. In this case we are creating a Deployment that will run a pod with the container we made previously. To start, create a folder called `manifests` in your current application folder. Within `manifests`, create a file called `deployment.yaml`.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: noobernetes
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: noobernetes
   template:
     metadata:
       name: noobernetes
       labels:
-        service: noobernetes-service
+        app: noobernetes
     spec:
       containers:
       - name: noobernetes-container
         image: noobernetes:hello-world
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SUPER_SECRET
+          value: "This is my secret string"
       restartPolicy: Always
-
+  name: noobernetes
 ```
 
 There are a few things to call out here:
 - We've made a deployment and under `metadata` we've added a name for our deployment.
-- We're using the `extensions/v1beta1` as our `apiVersion`
 - Under `spec` we've defined what our deployment should look like
   - We want it to have 1 `replica`, or one copy of the deployment. We could add more if we so chose.
   - We're providing some `metadata` about the deployment and we're telling it where to find the image that we pushed earlier.
@@ -80,22 +88,21 @@ So we can now see that our pod is running. Like before with Docker, we need to m
 You should see some output like this:
 
 ```shell
-> kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes-service
-Using docker VM
-service "noobernetes-service" exposed
+> kubectl expose deployment noobernetes-deployment --port=4000 --target-port=4567 --type=LoadBalancer --name=noobernetes
+│service/noobernetes exposed
 ```
 
 We've defined a Service, which can be thought of as a way to control access to a deployment or pod. As the actual running container changes (if it dies, or is restarted) the service is responsible for always allowing us to route traffic within our cluster to the correct pods.
 
 Our service says that we want to expose our app on localhost:4000, pointing to the 4567 port of the running container.
 
-`kubectl get services noobernetes`
+`kubectl get services`
 
 ```shell
-> kubectl get services noobernetes
-Using docker VM
-NAME                           TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-noobernetes   LoadBalancer   10.106.51.138   localhost     4000:31347/TCP   47m
+> kubectl get services
+NAME          TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes    ClusterIP      10.96.0.1        <none>        443/TCP          24m
+noobernetes   LoadBalancer   10.111.228.250   localhost     4000:31532/TCP   54s
 ```
 
 This tells us that its mapped localhost to the cluster-ip of our running container. Visit localhost:4000 and view your app!
@@ -108,21 +115,18 @@ apiVersion: v1
 kind: Service
 metadata:
   name: noobernetes
-  labels:
-    service: noobernetes-service
 spec:
-  type: NodePort
   ports:
-  - name: noobernetes-port
+  - nodePort: 31532
     port: 4000
     protocol: TCP
     targetPort: 4567
-    nodePort: 30000
   selector:
-    service: noobernetes-service
+    app: noobernetes
+  type: LoadBalancer
 ```
 
-This will allow us to access our application at `localhost:30000` after running the command `kubectl apply -f service.yaml` from within the `manifests` folder.
+This will allow us to access our application at `localhost:4000` after running the command `kubectl apply -f service.yaml` from within the `manifests` folder.
 
 ## Conclusion
 We now have our application running locally in Kubernetes! In the next section, we're going to configure our application to scale with CPU usage.

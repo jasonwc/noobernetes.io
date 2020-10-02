@@ -1,13 +1,16 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: noobernetes
 spec:
+  selector:
+    matchLabels:
+      app: noobernetes
   template:
     metadata:
       name: noobernetes
       labels:
-        service: noobernetes-service
+        app: noobernetes
     spec:
       containers:
       - name: noobernetes-container

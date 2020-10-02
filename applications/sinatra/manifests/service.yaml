@@ -2,15 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: noobernetes
-  labels:
-    service: noobernetes-service
 spec:
-  type: NodePort
   ports:
-  - name: noobernetes-port
+  - nodePort: 31532
     port: 4000
     protocol: TCP
     targetPort: 4567
-    nodePort: 30000
   selector:
-    service: noobernetes-service
+    app: noobernetes
+  type: LoadBalancer
+
