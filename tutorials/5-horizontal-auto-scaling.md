@@ -6,26 +6,27 @@ One exciting feature of Kubernetes is the ability to horizontally scale a worklo
 - You should have the `noobernetes` deployment and service applied to your Kubernetes cluster
 
 ## Installing the `metrics-server`
-The `metrics-server` provides information about the CPU and Memory Usage of containers running in your cluster. It is generally installed by default in most Kubernetes clusters, however with Docker for Mac we're going to have to install it ourselves.
+The [metrics-server](https://github.com/kubernetes-sigs/metrics-server) provides information about the CPU and Memory Usage of containers running in your cluster. It is generally installed by default in most Kubernetes clusters, however with Docker for Mac we're going to have to install it ourselves.
 
-First we'll need to clone the `metrics-server` repository.
-
-```
-git clone https://github.com/kubernetes-incubator/metrics-server
-```
-
-Next we'll need to apply the manifests for the `metrics-server` to our cluster.
+The official repository provides a quick way to install the metrics server:
 
 ```
-> kubectl apply -f deploy/1.8+/
-clusterrolebinding "metrics-server:system:auth-delegator" created
-rolebinding "metrics-server-auth-reader" created
-apiservice "v1beta1.metrics.k8s.io" created
-serviceaccount "metrics-server" created
-deployment "metrics-server" created
-service "metrics-server" created
-clusterrole "system:metrics-server" created
-clusterrolebinding "system:metrics-server" created
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
+```
+
+You should see some output like this:
+
+```
+> kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
+ clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
+ clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
+ rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
+ apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
+ serviceaccount/metrics-server created
+ deployment.apps/metrics-server created
+ service/metrics-server created
+ clusterrole.rbac.authorization.k8s.io/system:metrics-server created
+ clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
 ```
 
 The `metrics-server` will begin scraping our running containers for metrics.
@@ -34,18 +35,24 @@ The `metrics-server` will begin scraping our running containers for metrics.
 We will add a file called `horizontal-pod-autoscaler.yaml` for our HPA manifest.
 
 ```yaml
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: noobernetes-hpa
 spec:
-  maxReplicas: 10
-  minReplicas: 1
   scaleTargetRef:
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
-    name: noobernetes-deployment
-  targetCPUUtilizationPercentage: 50
+    name: noobernetes
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
 ```
 
 We can now apply this to our cluster just like any other Kubernetes resource.
@@ -58,17 +65,19 @@ horizontalpodautoscaler "noobernetes-hpa" created
 Before we begin trying to scale our pods, we first must update our Deployment to specify its resource requests, which in our case will be based on CPU utilization. The CPU utilization for a resource request is added under `spec` for a deployment. Your deployment should now look as follows. Note that after changing the Deployment, you will need to apply it again via `kubectl apply -f deployment.yaml` from within the `manifests` folder in your application in order for the changes to be applied.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: noobernetes-deployment
+  name: noobernetes
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: noobernetes
   template:
     metadata:
       name: noobernetes
       labels:
-        service: noobernetes
+        app: noobernetes
     spec:
       containers:
       - name: noobernetes-container
@@ -76,6 +85,13 @@ spec:
         resources:
           requests:
             cpu: 200m
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SUPER_SECRET
+          value: "This is my secret string"
       restartPolicy: Always
 ```
 
@@ -83,8 +99,8 @@ Now lets check out our HPA.
 
 ```
 > kubectl get hpa
-NAME                      REFERENCE                        TARGETS     MINPODS   MAXPODS   REPLICAS   AGE
-noobernetes-hpa   Deployment/noobernetes-deployment        0% / 50%    1         10        1          1m
+NAME              REFERENCE                TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+noobernetes-hpa   Deployment/noobernetes   <unknown>/50%   1         10        1          2m23s
 ```
 We can see that its targeting our deployment, and that CPU usage is currently at 0% of our 50% target that we specified earlier. It'll also let us know its current replica count and its minimum and maximum boundaries.
 
@@ -107,7 +123,7 @@ For now, we're going to use the `kubectl run` command to spin up a box that we c
 ```
 > kubectl run -i --tty load-generator --image=busybox /bin/sh
 If you don't see a command prompt, try pressing enter.
-/ # while true; do wget -q -O- http://noobernetes-service.default.svc.cluster.local:4444; done
+/ # while true; do wget -q -O- http://noobernetes:4000; done
 ```
 
 It may take some time, but eventually you should see CPU usage climb and more pods get automatically spun up by the HPA.
