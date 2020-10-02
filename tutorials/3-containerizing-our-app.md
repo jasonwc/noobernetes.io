@@ -33,10 +33,10 @@ CMD ["python", "app.py"]
 Our Dockerfile is going to be quite similar. Basically we need to use a ruby base image, install our dependencies, set our working directory, expose a port, and run our app!
 
 ### Choosing our base image
-We're going to use 2.3.7 as there is a nice base image on [Dockerhub](https://hub.docker.com/_/ruby/) that we can use. Dockerhub is a public repository of docker images and you can generally find one that suits your needs.
+We're going to use 2.7.1 as there is a nice base image on [Dockerhub](https://hub.docker.com/_/ruby/) that we can use. Dockerhub is a public repository of docker images and you can generally find one that suits your needs.
 
 ```dockerfile
-FROM ruby:2.3.7
+FROM ruby:2.7.1
 ```
 
 ### Setting our working directory
@@ -87,7 +87,7 @@ As you're iterating on Dockerfiles, you'll use tags to refer to distinct builds 
 ```shell
 > docker build . -t noobernetes:hello-world
 Sending build context to Docker daemon    150kB
-Step 1/6 : FROM ruby:2.3.7
+Step 1/6 : FROM ruby:2.7.1
 2.3.7: Pulling from library/ruby
 f2b6b4884fc8: Pull complete
 4fb899b4df21: Pull complete
@@ -97,7 +97,7 @@ f2b6b4884fc8: Pull complete
 dc0287a58907: Pull complete
 a8f7a36f204a: Pull complete
 Digest: sha256:b06292ba3869fbad0e866e1486a47f212f02082c87171987d2b566ad17973fc7
-Status: Downloaded newer image for ruby:2.3.7
+Status: Downloaded newer image for ruby:2.7.1
  ---> 9cc35bb87070
 Step 2/6 : WORKDIR /app
 Removing intermediate container a70559af729f

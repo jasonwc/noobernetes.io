@@ -4,6 +4,8 @@ require 'sinatra'
 
 set :bind, '0.0.0.0'
 
+# This method builds widgets! We're adding some mathematical computation
+# so that it will take some time and CPU power to create a widget
 def build_widget
   100.times do |i|
     100000.downto(1) do |j|
