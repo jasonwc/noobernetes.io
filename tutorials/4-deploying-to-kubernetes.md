@@ -30,6 +30,9 @@ spec:
       containers:
       - name: noobernetes-container
         image: noobernetes:hello-world
+        resources:
+          requests:
+            cpu: 200m
         env:
         - name: POD_NAME
           valueFrom:
@@ -38,7 +41,6 @@ spec:
         - name: SUPER_SECRET
           value: "This is my secret string"
       restartPolicy: Always
-  name: noobernetes
 ```
 
 There are a few things to call out here:
