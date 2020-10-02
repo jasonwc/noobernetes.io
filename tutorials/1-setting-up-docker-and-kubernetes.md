@@ -4,9 +4,9 @@ Before we get started, we're going to set up a local Kubernetes cluster and Dock
 
 ## Mac
 ### Installing Docker for Mac
-1) Visit the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+1) Visit the [Docker Desktop homepage](https://www.docker.com/products/docker-desktop)
 
-2) Click `Get Stable` and install it.
+2) Click `Download for Mac (Stable)` and install it.
 
 ### Enabling Kubernetes
 1) Click on Docker for Desktop in the menu bar, go to _Preferences_ -> _Kubernetes_ and click _Enable Kubernetes_ and _Apply & Restart_
