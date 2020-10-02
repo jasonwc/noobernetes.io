@@ -8,16 +8,12 @@ One exciting feature of Kubernetes is the ability to horizontally scale a worklo
 ## Installing the `metrics-server`
 The [metrics-server](https://github.com/kubernetes-sigs/metrics-server) provides information about the CPU and Memory Usage of containers running in your cluster. It is generally installed by default in most Kubernetes clusters, however with Docker for Mac we're going to have to install it ourselves.
 
-The official repository provides a quick way to install the metrics server:
+The official repository provides a quick way to install the metrics server, but we'll need to [tweak it](https://blog.codewithdan.com/enabling-metrics-server-for-kubernetes-on-docker-desktop/) a little bit to get it to work with Docker for Mac
+
+If you'd like to just use a pre-tweaked file, you can find it at `applications/metrics-server/metrics.yaml`
 
 ```
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
-```
-
-You should see some output like this:
-
-```
-> kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
+> kubectl apply -f applications/metrics-server/metrics.yaml
  clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
  clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
  rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
@@ -128,3 +124,4 @@ HPAs are powerful tools that let us automate scaling in our cluster. While scali
 ## Resources
 - [Horizontal Pod Autoscaler Walkthrough](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)
 - [Support For Custom Metrics](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics)
+- [Enabling Metrics Server for  Kubernetes on Docker Desktop](https://blog.codewithdan.com/enabling-metrics-server-for-kubernetes-on-docker-desktop/)
