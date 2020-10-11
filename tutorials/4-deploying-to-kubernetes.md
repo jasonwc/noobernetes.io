@@ -30,9 +30,6 @@ spec:
       containers:
       - name: noobernetes-container
         image: noobernetes:hello-world
-        resources:
-          requests:
-            cpu: 200m
         env:
         - name: POD_NAME
           valueFrom:
