@@ -5,8 +5,14 @@ This site is for application developers new to the world of Kubernetes that want
 - Kubernetes basics: writing Deployments and Services and interacting with a Kubernetes cluster
 - Horizontal Pod Autoscaling: using Kubernetes to scale a deployment based on CPU usage
 
-## How to use
-Each tutorial contains all the code required for that section, and lists any dependencies from previous tutorials. If you want to write the code yourself, go for it! If you'd rather skip to the end, all the required application code and manifests are included in the `applications` directory. Simply clone the repository and you're off to the races!
+## Getting started
+If you want to move quickly, you may choose to clone the repo before continuing on to the tutorials below:
+
+```
+git clone https://github.com/jasonwc/noobernetes.io.git
+```
+
+If you want to write the code yourself, go for it! If you'd rather skip to the end, all the required application code and manifests are included in the `applications` directory.
 
 ## Tutorials
 - [Setting up Docker and Kubernetes](./tutorials/1-setting-up-docker-and-kubernetes.md)
