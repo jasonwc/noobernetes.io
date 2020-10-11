@@ -4,6 +4,7 @@ One exciting feature of Kubernetes is the ability to horizontally scale a worklo
 
 ## Prerequisites
 - You should have the `noobernetes` deployment and service applied to your Kubernetes cluster
+- (optional) You should have the [watch](https://linux.die.net/man/1/watch) command installed
 
 ## Installing the `metrics-server`
 The [metrics-server](https://github.com/kubernetes-sigs/metrics-server) provides information about the CPU and Memory Usage of containers running in your cluster. It is generally installed by default in most Kubernetes clusters, however with Docker for Mac we're going to have to install it ourselves.
@@ -97,18 +98,16 @@ We can see that its targeting our deployment, and that CPU usage is currently at
 ## Watch it scale!
 We're now ready to see our HPA in action. We're going to use the `watch` command so that we can see it live!
 
-Run each of these commands in a tab/pane of your terminal:
-
 `watch kubectl get pods`
 
 `watch kubectl get hpa`
 
-This will refresh our view every 2 seconds so that we can follow along as Kubernetes scales our application.
+This will refresh our view every 2 seconds so that we can follow along as Kubernetes scales our application. If you don't have watch installed, you can just re-run the command when you'd like to see updates.
 
 ## Generating load
-Now that we've got our pods and hpa monitored we're ready to start generating some load on our server. 
+Now that we're monitoring pods and hpa we're ready to generate some load on our server. 
 
-For now, we're going to use the `kubectl run` command to spin up a box that we can interact with. We'll just do a loop in bash to hit our application over and over again. Run the following command in another pane or tab of your terminal:
+Let's use the `kubectl run` command to spin up a pod that we can use to send traffic to our service in a loop. With the `run` command you can run any contiainer images as a kubernetes pod. We're going to use [busybox](https://busybox.net/about.html), a lightweight utility image. Run the following command in another pane or tab of your terminal:
 
 ```
 > kubectl run -i --tty load-generator --image=busybox /bin/sh
